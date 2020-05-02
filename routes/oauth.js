@@ -1,6 +1,7 @@
 const { client_id, client_secret } = require('../api/boardgameatlas')
 const axios = require('axios')
 const qs = require('qs')
+const User = require('../schemas/user')
 
 module.exports.get = (req, res) => {
     const requestToken = req.query.code
@@ -22,6 +23,31 @@ module.exports.get = (req, res) => {
     })
         .then((response) => {
             const accessToken = response.data.access_token
+            axios
+                .get(`https://www.boardgameatlas.com/api/user/data?client_id=${client_id}`, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                })
+                .then(({ data }) => {
+                    let loginUser = data.user
+
+                    // TODO: Send response to front end
+                    User.countDocuments({ id: loginUser.id }, (err, count) => {
+                        if (count > 0) {
+                            return
+                        } else {
+                            let newUser = {
+                                id: loginUser.id,
+                                username: loginUser.username,
+                                country: '',
+                                age: null,
+                            }
+                            User.create(newUser)
+                        }
+                    })
+                })
+
             res.redirect(`http://localhost:3000/dashboard?access_token=${accessToken}`)
         })
         .catch((err) => {
