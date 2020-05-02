@@ -2,12 +2,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const oauth = require('./routes/oauth')
-const users = require('./routes/users')
+const user = require('./routes/user')
 const app = express()
 
 app.use(cors())
 app.route('/oauth').get(oauth.get)
-app.route('/users').get(users.get)
+app.route('/user').get(user.get)
 
 mongoose.set('useCreateIndex', true)
 const db = `mongodb+srv://admin-emil:${process.env.PASSWORD}@userdata-43fxt.mongodb.net/test?retryWrites=true&w=majority`
