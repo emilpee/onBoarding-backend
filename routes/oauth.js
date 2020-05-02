@@ -31,8 +31,6 @@ module.exports.get = (req, res) => {
                 })
                 .then(({ data }) => {
                     let loginUser = data.user
-
-                    // TODO: Send response to front end
                     User.countDocuments({ id: loginUser.id }, (err, count) => {
                         if (count > 0) {
                             return
@@ -48,7 +46,7 @@ module.exports.get = (req, res) => {
                     })
                 })
 
-            res.redirect(`http://localhost:3000/dashboard?access_token=${accessToken}`)
+            res.status(200).redirect(`http://localhost:3000/dashboard?access_token=${accessToken}`)
         })
         .catch((err) => {
             throw new Error(err.response)
