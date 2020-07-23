@@ -1,4 +1,4 @@
-const { client_id, client_secret } = require('../api/boardgameatlas')
+const { CLIENT_ID, CLIENT_SECRET } = require('../api/boardgameatlas')
 const axios = require('axios')
 const qs = require('qs')
 const User = require('../schemas/user')
@@ -7,8 +7,8 @@ module.exports.get = (req, res) => {
     const requestToken = req.query.code
 
     let data = {
-        client_id,
-        client_secret,
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
         code: requestToken,
         redirect_uri: `http://localhost:8080/oauth`,
         grant_type: 'authorization_code',
