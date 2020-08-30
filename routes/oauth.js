@@ -5,6 +5,7 @@ const User = require('../schemas/user')
 
 module.exports.get = (req, res) => {
     const requestToken = req.query.code
+    var loginUser = null
 
     let data = {
         client_id,
@@ -30,7 +31,7 @@ module.exports.get = (req, res) => {
                     },
                 })
                 .then(({ data }) => {
-                    let loginUser = data.user
+                    loginUser = data.user
                     User.countDocuments({ id: loginUser.id }, (err, count) => {
                         if (count > 0) {
                             return
@@ -44,9 +45,9 @@ module.exports.get = (req, res) => {
                             User.create(newUser)
                         }
                     })
-                })
 
-            res.status(200).redirect(`http://localhost:3000/dashboard?access_token=${accessToken}`)
+                    res.status(200).redirect(`http://localhost:3000/dashboard?user=${loginUser.id}?access_token=${accessToken}`)
+                })
         })
         .catch((err) => {
             throw new Error(err.response)
