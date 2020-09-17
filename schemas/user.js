@@ -12,16 +12,6 @@ const userSchema = new mongoose.Schema(
             unique: true,
             required: true,
         },
-        country: {
-            type: String,
-            unique: false,
-            required: false,
-        },
-        age: {
-            type: Number,
-            unique: false,
-            required: false,
-        },
     },
     { timestamps: true },
 )

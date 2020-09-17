@@ -39,17 +39,16 @@ module.exports.get = (req, res) => {
                             let newUser = {
                                 id: loginUser.id,
                                 username: loginUser.username,
-                                country: '',
-                                age: null,
                             }
                             User.create(newUser)
                         }
                     })
 
-                    res.status(200).redirect(`http://localhost:3000/dashboard?user=${loginUser.id}?access_token=${accessToken}`)
+                    res.status(200).redirect(`http://localhost:3000/dashboard?access_token=${accessToken}?user=${loginUser.id}`)
                 })
         })
         .catch((err) => {
+            res.status(500).redirect('http://localhost:3000/login')
             throw new Error(err.response)
         })
 }
