@@ -1,18 +1,18 @@
 const mongoose = require('mongoose')
 
-// TODO - Implement typescript.
+// TODO - Save with user ID?.
 
 const collectionSchema = new mongoose.Schema(
     {
-        gameIds: {
-            type: Array,
-            unique: false,
-            required: false,
+        gameId: {
+            type: String,
+            unique: true,
+            required: true,
         },
     },
     { timestamps: false },
 )
 
-const Collection = mongoose.model('UserSettings', collectionSchema)
+const Collection = mongoose.model('Collection', collectionSchema)
 
 module.exports = Collection
