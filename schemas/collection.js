@@ -1,16 +1,20 @@
 const mongoose = require('mongoose')
 
-// TODO - Save with user ID?.
-
 const collectionSchema = new mongoose.Schema(
     {
-        gameId: {
+        id: {
             type: String,
             unique: true,
-            required: true,
         },
+        games: [
+            {
+              id: {
+                  type: String,
+                  unique: true,
+              }
+            }
+        ],
     },
-    { timestamps: false },
 )
 
 const Collection = mongoose.model('Collection', collectionSchema)

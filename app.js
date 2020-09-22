@@ -5,7 +5,6 @@ const oauth = require('./routes/oauth')
 const user = require('./routes/user')
 const users = require('./routes/users')
 const collection  = require('./routes/collection')
-const game = require('./routes/game')
 const mongo = require('./api/mongo')
 const app = express()
 const bodyParser = require('body-parser');
@@ -22,13 +21,10 @@ app.route('/users')
 app.route('/users/:id')
 .get(user.get)
 
-app.route('/collection')
+app.route('/collection/:id')
 .get(collection.get)
 .post(collection.post)
-
-app.route('/collection/:id')
-.get(game.get)
-.delete(game.delete)
+.delete(collection.delete)
 
 mongoose.set('useCreateIndex', true)
 const db = `mongodb+srv://admin-emil:${mongo.password}@userdata-43fxt.mongodb.net/test?retryWrites=true&w=majority`
