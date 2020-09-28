@@ -25,7 +25,7 @@ app
   .delete(collection.delete);
 
 mongoose.set("useCreateIndex", true);
-const db = `mongodb+srv://admin-emil:${mongo.password}@userdata-43fxt.mongodb.net/test?retryWrites=true&w=majority`;
+const db = `mongodb+srv://admin-emil:${mongo.password}@userdata-43fxt.mongodb.net/onBoardingCollection?retryWrites=true&w=majority`;
 mongoose
   .connect(db, { useUnifiedTopology: true, useNewUrlParser: true })
   .then(() => {

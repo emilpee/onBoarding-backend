@@ -31,10 +31,9 @@ module.exports.post = async (req, res) => {
     res
       .status(200)
       .send(
-        await Collection.findOneAndUpdate(
-          { _id: req.params._id },
-          { $set: { games: req.body.games } },
-          { useFindAndModify: false }
+        await Collection.updateOne(
+          { id: req.params.id },
+          { $addToSet: { games: req.body.games } }
         )
       );
   } catch (err) {
