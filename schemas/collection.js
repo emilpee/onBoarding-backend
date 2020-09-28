@@ -1,22 +1,20 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const collectionSchema = new mongoose.Schema(
+const collectionSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    unique: true,
+  },
+  games: [
     {
-        id: {
-            type: String,
-            unique: true,
-        },
-        games: [
-            {
-              id: {
-                  type: String,
-                  unique: true,
-              }
-            }
-        ],
+      id: {
+        type: String,
+        unique: true,
+      },
     },
-)
+  ],
+});
 
-const Collection = mongoose.model('Collection', collectionSchema)
+const Collection = mongoose.model("Collection", collectionSchema);
 
-module.exports = Collection
+module.exports = Collection;
